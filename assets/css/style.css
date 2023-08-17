@@ -1,0 +1,25 @@
+/* Jumbotron  */
+h1
+{
+    text-align: center;
+}
+
+.Background {
+    height: calc(100vh - 25px);
+    background-image: url(/assets/images/home-backround.jpg);
+    background-size: cover;
+    background-color: red !important;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Jumbotron copy */
+  .jumboCopy {
+    width: 70%;
+    min-width: 500px;
+    max-width: 700px;
+    color: white;
+    text-align: center;
+  }
