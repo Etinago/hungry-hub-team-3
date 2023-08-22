@@ -1,24 +1,222 @@
 /* Jumbotron  */
-h1
-{
-    text-align: center;
+h1 {
+  text-align: center;
 }
 
 .Background {
-    height: calc(100vh - 25px);
-    background-image: url(../images/home-backround.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
+  height: calc(100vh - 25px);
+  background-image: url(../images/home-backround.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Jumbotron copy */
+.jumboCopy {
+  width: 70%;
+  min-width: 500px;
+  max-width: 700px;
+  color: white;
+  text-align: center;
+}
+
+.btn {
+  background-color: black;
+  /* height: 64px; */
+  padding: 12px 32px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: auto;
+  text-align: center;
+}
+
+.input-lg {
+  height: 64px;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+/* .inputarea {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+} */
+body {
+  width: 100vw;
+}
+.name-input {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.inputarea-search {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}
+
+.section-search {
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  display: flex;
+}
+
+.mycontainer {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mycontainer.full {
+  height: 100%;
+}
+
+.top-nav-hs {
+  width: 100%;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.form {
+  display: flex;
+}
+
+.text-field {
+  min-height: 64px;
+  margin-bottom: 0;
+  margin-right: 1rem;
+  font-size: 16px;
+}
+
+.submit-button {
+  width: 164px;
+  height: 64px;
+  background-color: #000;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.form-block {
+  width: 100%;
+  max-width: 512px;
+  margin-bottom: 0;
+}
+
+.heading {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.restaurant-map {
+  justify-content: space-between;
+  margin-top: 48px;
+  display: flex;
+}
+
+.rm-left {
+  width: 40%;
+}
+
+.rm-right {
+  width: 60%;
+}
+
+.resturant-list {
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+  flex-direction: column;
+  display: flex;
+}
+
+.resturant-wrapper {
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.res-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.res-info {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  flex-direction: column;
+  display: flex;
+}
+
+.res-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.map-wrapper {
+  height: 720px;
+}
+
+@media screen and (max-width: 767px) {
+  .top-nav-hs,
+  .restaurant-map {
+    flex-direction: column;
+  }
+
+  .rm-left,
+  .rm-right {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .form {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-direction: column;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+
+  .restaurant-map {
+    margin-top: 32px;
+  }
+
+  .resturant-wrapper {
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    flex-direction: column;
+  }
+
+  .res-image {
+    width: 100%;
     align-items: center;
-    justify-content: center;
+    display: flex;
   }
-  
-  /* Jumbotron copy */
-  .jumboCopy {
-    width: 70%;
-    min-width: 500px;
-    max-width: 700px;
-    color: white;
-    text-align: center;
+
+  .res-info {
+    width: 100%;
   }
+
+  .res-name {
+    line-height: 1.2;
+  }
+
+  .res-imagelist {
+    width: 100%;
+  }
+}
