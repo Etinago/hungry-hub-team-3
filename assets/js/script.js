@@ -1,5 +1,7 @@
 $(document).ready(function(){
     var searchHistory = [];
+    $("#weatherInfo").hide();
+    $("searchResults").hide();
     $("#homePage").show();
     $("#btnSearch").click(function(e) {
         var searchCity = $("#inputCity").val().trim();
@@ -24,7 +26,8 @@ var apiKey = 'TyxnNp5tPqoz8sYDPgjAVB0vpXmYfFuYVYLuyMKtQepxs4SWZWB4Vt4URFD-e1cfnm
 let myHeaders = new Headers();
 myHeaders.append("Authorization", "Bearer " + apiKey);
 var searchCity = JSON.parse(localStorage.getItem("search")) || [];
-//clear local storage after getting city
+
+//fetch restaurants in city
 
 fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&location="+searchCity, {
   headers: myHeaders 
@@ -61,14 +64,13 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
                 
                 $('#results').append('<div id="' + alias + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>Rating: </b>' + rating + ' with ' + reviewcount + ' reviews.</div>');
                 
-                
-                
-                 $("#results").on("click", function (e)
+                             
+                $("#results").on("click", function (e)
                 {         
-                  //  var id = $(this).attr("id");  
-                    //var id = $(this).attr('id')  
+                  var alias1 = e.id;
+                 // var alias1 = $(this).attr('alias')  
                  //get details of restaurant clicked
-                 console.log(id);
+                 console.log(alias1);
                 })
             });
         } else {
@@ -78,9 +80,61 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
         console.log(results);
                 
     })  
+    
+   
+    // fetch weather conditions in city
+    //URL to call the API to find current weather
+  
+   var apiURL = `https://api.openweathermap.org/data/2.5/weather?`;
+
+    
+   var apiForecast = `https://api.openweathermap.org/data/2.5/forecast?`;
+
+    var key = "f6fcca586c887008feb57c771ac2c504";
+    
+    var queryURL = apiURL + "q="  + searchCity + "&appid=" + key; 
+        
+       
+    getWeather(queryURL);
+    
+  }
+  
+  function getWeather(queryURL)
+        
+  {
+        
+    fetch(queryURL)
+      .then(function (response) {
+        return response.json();
+            }).then(function (data) {    
+        console.log(data);            
+        //Convert the temp to Celsius
+
+        var temp = data.main.temp - 273.15;
+
+        // To get date
+        dateToday = dayjs();
+        dateToday = dayjs(dateToday).format('DD/MM/YYYY');
+        // Transfer content to HTML
+        //create an element to store weather icon and display it
+        var weatherImg = data.weather[0].icon;
+        // Retrieving the URL for the image
+        $("#weatherInfo").show()
+        
+         $(".city").html("<h3>" + data.name + ' ' + dateToday + "</h3>" + " ");
+         $("#currentWeather").attr("src", "https://openweathermap.org/img/wn/" + weatherImg + "@2x.png");
+         //$(".city").append(iconForecast);
+         $(".temp").text("Temperature (C) " + temp.toFixed(2));
+         $(".wind").text("Wind Speed: " + data.wind.speed);
+         $(".humidity").text("Humidity: " + data.main.humidity);
+               
+            });
+
+
+    
     //clear storage after displaying results
     localStorage.clear();
+
    
-    
 }
-  
+
