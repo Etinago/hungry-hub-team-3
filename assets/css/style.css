@@ -6,7 +6,7 @@ h1
 
 .Background {
     height: calc(100vh - 25px);
-    background-image: url(home-backround.jpg);
+    background-image: url(../images/home-backround.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
