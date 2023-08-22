@@ -6,9 +6,8 @@ h1
 
 .Background {
     height: calc(100vh - 25px);
-    background-image: url(/assets/images/home-backround.jpg);
+    background-image: url(home-backround.jpg);
     background-size: cover;
-    background-color: red !important;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
