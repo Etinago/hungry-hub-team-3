@@ -13,22 +13,39 @@
       href="https://fonts.googleapis.com/css?family=Anton%7CJura&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="style.css">    
     <title>Hungry Hub</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
+  <form id = "homePage">
   <body>
-
+  
     <!-- Jumbotron -->
 
     <!---html structure-->>
-    <div class="p-5 mb-4 bg-body-tertiary rounded-3 Background">
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3 Background" id="background">
         <div class="container-fluid py-5 jumboCopy">
           <h1 class="display-5 fw-bold">Hungry Hub</h1>
           <p class="col-md-12 fs-4">Find the best places to eat, drink, and visit any city in the world with Weather information.</p>
           <input class="form-control input-lg" placeholder="Search by City" id="inputCity" type="text"> </input>
-          <button class="btn btn-primary btn-lg" type="button">Find restaurants</button>
+          <button class="btn btn-primary btn-lg" id="btnSearch" type="button">Find restaurants</button>
         </div>
       </div>
+      <script type="text/javascript" src="script.js"></script>
+
       <!-- End jumbotron -->
+    </form>
+     <!--Search Results Form-->
+      <form id = "searchResults">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="results">
+        
+                </div>
+            </div>
+         </div>
+        </div>
   </body>
+</form>
 </html>
