@@ -120,8 +120,10 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
         var weatherImg = data.weather[0].icon;
         // Retrieving the URL for the image
         $("#weatherInfo").show()
-        
-         $(".city").html("<h3>" + data.name + ' ' + dateToday + "</h3>" + " ");
+         var nameCity = data.name;
+         var lon = data.coord.lon;
+         var lat = data.coord.lat;
+         $(".city").html("<h3>" + nameCity + ' ' + dateToday + "</h3>" + " ");
          $("#currentWeather").attr("src", "https://openweathermap.org/img/wn/" + weatherImg + "@2x.png");
          //$(".city").append(iconForecast);
          $(".temp").text("Temperature (C) " + temp.toFixed(2));
@@ -129,12 +131,17 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
          $(".humidity").text("Humidity: " + data.main.humidity);
                
             });
-
-
-    
+    initMap();
     //clear storage after displaying results
     localStorage.clear();
 
-   
+      
 }
 
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+function initMap() {
+  var searchCity = JSON.parse(localStorage.getItem("search")) || [];
+ $('#map').attr('src', "https://www.google.com/maps/embed/v1/place?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&q=restaurants,"+searchCity) 
+}

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">    
     <title>Hungry Hub</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places"></script>
   </head>
   <form id = "homePage">
   <body>
@@ -58,6 +59,18 @@
            <div class="temp"></div>
            <div class="wind"></div>
            <div class="humidity"></div>
+         </div>
+
+         <div class="map">
+          <iframe
+          id = "map"
+          width="300"
+          height="400"
+          frameborder="0" style="border:0"
+          referrerpolicy="no-referrer-when-downgrade"
+                    
+          allowfullscreen>
+          </iframe>
          </div>
 
       </div>
