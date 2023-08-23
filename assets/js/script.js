@@ -63,19 +63,7 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
                 var reviewcount = item.review_count;
                 //display restaurants obtained from fetch
                 $('#results').append('<div id="' + alias + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>Rating: </b>' + rating + ' with ' + reviewcount + ' reviews.</div>');
-                // $("#results").children().on("click", function(e)
-                // {
-
-                //  let myHeaders = new Headers();
-                //   myHeaders.append("Authorization", "Bearer " + apiKey);
-                //   var restaurantAlias = this.id;
-                //   console.log(restaurantAlias);
-                //   //fetch restaurants in city
-                //   restaurantDetailQuery = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/"+restaurantAlias
-                             
-                //  // getRestaurantDetails(restaurantDetailQuery);
-                               
-                // });                          
+                                     
                
             });
         } else {
