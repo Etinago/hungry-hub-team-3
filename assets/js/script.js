@@ -1,4 +1,4 @@
-var apiKey = '_VBFI-x7PS1q8QsoYmfOzwBjyxTtQJV8UHunPlBCbq7VfPw39xMVSTmpCe9wUAQmr5AQ0JSKmL33E7lx8_3JzvcoC-I4Zpcap-Px9F_KZ30-rPlgt00S61a1_jPmZHYx'
+var apiKey = 'GWknUHKV4iUZkgwcF7d36Nk1V3ogtoIW9SkINz5Ikn_KA-YSzNyNXldUBLuQqUj4QDx8i-Vw3Bgepbpg4U6DtkSEJOB2aranWnq5TaX6MHE6nxp8qakLNGfONmrmZHYx'
 let myHeaders = new Headers();
 myHeaders.append("Authorization", "Bearer " + apiKey);
 $(document).ready(function(){
@@ -46,14 +46,12 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
            
             // Display a header on the page with the number of results
 
-            $('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
+            //$('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
             // Iterate through the JSON array of 'businesses' which was returned by the API
             $.each(data.businesses, function(i, item) {
                 // Store each business's object in a variable
                 var id = item.id;
                 var alias = item.alias;
-                var latitude = item.coordinates.latitude;
-                var latitude = item.coordinates.longitude;
                 var image = item.image_url;
                 var name = item.name;
                 var address = item.location.address1;
@@ -65,28 +63,20 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
                 var reviewcount = item.review_count;
                 //display restaurants obtained from fetch
                 $('#results').append('<div id="' + alias + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>Rating: </b>' + rating + ' with ' + reviewcount + ' reviews.</div>');
-                $("#results").children().on("click", function(e)
-                {
+                // $("#results").children().on("click", function(e)
+                // {
 
-                  var apiKey = 'TyxnNp5tPqoz8sYDPgjAVB0vpXmYfFuYVYLuyMKtQepxs4SWZWB4Vt4URFD-e1cfnm3nt4nITYQDIhxIxj3ub50tCk4YgX-oRJEfJlU8-dm2tsEIBva6aUOS03_fZHYx'
-                  let myHeaders = new Headers();
-                  myHeaders.append("Authorization", "Bearer " + apiKey);
-                  var restaurantAlias = this.id;
-                  console.log(restaurantAlias);
-                  //fetch restaurants in city
-                  restaurantDetailQuery = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/"+restaurantAlias
-                                   
-                  getRestaurantDetails(restaurantDetailQuery);
-                               
-                });
+                //  let myHeaders = new Headers();
+                //   myHeaders.append("Authorization", "Bearer " + apiKey);
+                //   var restaurantAlias = this.id;
+                //   console.log(restaurantAlias);
+                //   //fetch restaurants in city
+                //   restaurantDetailQuery = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/"+restaurantAlias
                              
-                // $("#results.div").on("click", function (e)
-                // {         
-                //   var alias1 = e.id;
-                //  // var alias1 = $(this).attr('alias')  
-                //  //get details of restaurant clicked
-                //  console.log(alias1);
-                // })
+                //  // getRestaurantDetails(restaurantDetailQuery);
+                               
+                // });                          
+               
             });
         } else {
             // If our results are 0; no businesses were returned by the JSON therefor we display on the page no results were found
@@ -101,23 +91,23 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
     //URL to call the API to find current weather
   
    var apiURL = `https://api.openweathermap.org/data/2.5/weather?`;
-
-    
+  
    var apiForecast = `https://api.openweathermap.org/data/2.5/forecast?`;
 
-    var key = "f6fcca586c887008feb57c771ac2c504";
+   var key = "f6fcca586c887008feb57c771ac2c504";
     
-    var queryURL = apiURL + "q="  + searchCity + "&appid=" + key; 
+   var queryURL = apiURL + "q="  + searchCity + "&appid=" + key; 
         
        
-    getWeather(queryURL);
+   getWeather(queryURL);
     
   }
   
   function getWeather(queryURL)
         
   {
-        
+    
+    
     fetch(queryURL)
       .then(function (response) {
         return response.json();
@@ -140,9 +130,7 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
          var lat = data.coord.lat;
          $(".city").html("<h3>" + nameCity + ' ' + dateToday + "</h3>" + " ");
          $("#currentWeather").attr("src", "https://openweathermap.org/img/wn/" + weatherImg + "@2x.png");
-         //$(".city").append(iconForecast);
          $(".temp").text("Temperature (C) " + temp.toFixed(2));
-         $(".wind").text("Wind Speed: " + data.wind.speed);
          $(".humidity").text("Humidity: " + data.main.humidity);
                
             });
@@ -161,45 +149,4 @@ function initMap() {
  $('#map').attr('src', "https://www.google.com/maps/embed/v1/place?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&q=restaurants,"+searchCity) 
 }
 
-function getRestaurantDetails(restaurantDetailQuery)
 
-{
-  fetch(restaurantDetailQuery, {
-    headers: myHeaders 
-  }).then((data) => {
-    return data.json();
-  }).then((data) => {
-   // Store the restaurant's object in variables
-   var name = data.name;
-   var image1 = data.photos[0];
-   var image2 = data.photos[1];
-   //var category1 = data.categories[0].title;
-   //var category2 = data.categories[1].title;
-   var address = data.location;
-   var phone = data.phone
-   var price = data.price;
-
-   //create modal form to display restaurants
-   var form = $("<form></form>");
-   $("#form").attr("id", "restaurantDetailsModal")
-   //$("#form").attr("class", "modal-dialog")   
-   //form.append('<id="restaurantDetails">');
-   $("#searchResults").append("#restaurantDetailsModal");
-   $("#restaurantDetailsModal").modal('show');
-   $('#commonModal').modal('show');
-
-  
-  // $(".popup-overlay, .popup-content").addClass("active");
-  
-  
-  // //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
-  // $(".close, .popup-overlay").on("click", function() {
-  //   $(".popup-overlay, .popup-content").removeClass("active");
-  // });
-
-
-
-   //$.showModal({title: "Restaurant Details", id: "restaurantDetails"})
-   //$('#restaurantDetails').append('<div id="' + name + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image1 + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>');
-  })  
-}
