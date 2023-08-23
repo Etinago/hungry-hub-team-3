@@ -1,8 +1,12 @@
+var apiKey = '_VBFI-x7PS1q8QsoYmfOzwBjyxTtQJV8UHunPlBCbq7VfPw39xMVSTmpCe9wUAQmr5AQ0JSKmL33E7lx8_3JzvcoC-I4Zpcap-Px9F_KZ30-rPlgt00S61a1_jPmZHYx'
+let myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer " + apiKey);
 $(document).ready(function(){
     var searchHistory = [];
     $("#weatherInfo").hide();
     $("searchResults").hide();
     $("#homePage").show();
+    $(".popup-overlay, .popup-content").removeClass("active")
     $("#btnSearch").click(function(e) {
         var searchCity = $("#inputCity").val().trim();
         console.log(searchCity)
@@ -22,9 +26,7 @@ $(document).ready(function(){
 
 function renderSearch() 
 {
-var apiKey = 'TyxnNp5tPqoz8sYDPgjAVB0vpXmYfFuYVYLuyMKtQepxs4SWZWB4Vt4URFD-e1cfnm3nt4nITYQDIhxIxj3ub50tCk4YgX-oRJEfJlU8-dm2tsEIBva6aUOS03_fZHYx'
-let myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer " + apiKey);
+
 var searchCity = JSON.parse(localStorage.getItem("search")) || [];
 
 //fetch restaurants in city
@@ -61,23 +63,36 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
                 var phone = item.display_phone;
                 var rating = item.rating;
                 var reviewcount = item.review_count;
-                
+                //display restaurants obtained from fetch
                 $('#results').append('<div id="' + alias + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>Rating: </b>' + rating + ' with ' + reviewcount + ' reviews.</div>');
-                
+                $("#results").children().on("click", function(e)
+                {
+
+                  var apiKey = 'TyxnNp5tPqoz8sYDPgjAVB0vpXmYfFuYVYLuyMKtQepxs4SWZWB4Vt4URFD-e1cfnm3nt4nITYQDIhxIxj3ub50tCk4YgX-oRJEfJlU8-dm2tsEIBva6aUOS03_fZHYx'
+                  let myHeaders = new Headers();
+                  myHeaders.append("Authorization", "Bearer " + apiKey);
+                  var restaurantAlias = this.id;
+                  console.log(restaurantAlias);
+                  //fetch restaurants in city
+                  restaurantDetailQuery = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/"+restaurantAlias
+                                   
+                  getRestaurantDetails(restaurantDetailQuery);
+                               
+                });
                              
-                $("#results").on("click", function (e)
-                {         
-                  var alias1 = e.id;
-                 // var alias1 = $(this).attr('alias')  
-                 //get details of restaurant clicked
-                 console.log(alias1);
-                })
+                // $("#results.div").on("click", function (e)
+                // {         
+                //   var alias1 = e.id;
+                //  // var alias1 = $(this).attr('alias')  
+                //  //get details of restaurant clicked
+                //  console.log(alias1);
+                // })
             });
         } else {
             // If our results are 0; no businesses were returned by the JSON therefor we display on the page no results were found
             $('#results').append('<h5>We discovered no results!</h5>');
         }
-        console.log(results);
+        //console.log(results);
                 
     })  
     
@@ -120,8 +135,10 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
         var weatherImg = data.weather[0].icon;
         // Retrieving the URL for the image
         $("#weatherInfo").show()
-        
-         $(".city").html("<h3>" + data.name + ' ' + dateToday + "</h3>" + " ");
+         var nameCity = data.name;
+         var lon = data.coord.lon;
+         var lat = data.coord.lat;
+         $(".city").html("<h3>" + nameCity + ' ' + dateToday + "</h3>" + " ");
          $("#currentWeather").attr("src", "https://openweathermap.org/img/wn/" + weatherImg + "@2x.png");
          //$(".city").append(iconForecast);
          $(".temp").text("Temperature (C) " + temp.toFixed(2));
@@ -129,12 +146,60 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
          $(".humidity").text("Humidity: " + data.main.humidity);
                
             });
-
-
-    
+    initMap();
     //clear storage after displaying results
     localStorage.clear();
 
-   
+      
 }
 
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+function initMap() {
+  var searchCity = JSON.parse(localStorage.getItem("search")) || [];
+ $('#map').attr('src', "https://www.google.com/maps/embed/v1/place?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&q=restaurants,"+searchCity) 
+}
+
+function getRestaurantDetails(restaurantDetailQuery)
+
+{
+  fetch(restaurantDetailQuery, {
+    headers: myHeaders 
+  }).then((data) => {
+    return data.json();
+  }).then((data) => {
+   // Store the restaurant's object in variables
+   var name = data.name;
+   var image1 = data.photos[0];
+   var image2 = data.photos[1];
+   //var category1 = data.categories[0].title;
+   //var category2 = data.categories[1].title;
+   var address = data.location;
+   var phone = data.phone
+   var price = data.price;
+
+   //create modal form to display restaurants
+   var form = $("<form></form>");
+   $("#form").attr("id", "restaurantDetailsModal")
+   //$("#form").attr("class", "modal-dialog")   
+   //form.append('<id="restaurantDetails">');
+   $("#searchResults").append("#restaurantDetailsModal");
+   $("#restaurantDetailsModal").modal('show');
+   $('#commonModal').modal('show');
+
+  
+  // $(".popup-overlay, .popup-content").addClass("active");
+  
+  
+  // //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+  // $(".close, .popup-overlay").on("click", function() {
+  //   $(".popup-overlay, .popup-content").removeClass("active");
+  // });
+
+
+
+   //$.showModal({title: "Restaurant Details", id: "restaurantDetails"})
+   //$('#restaurantDetails').append('<div id="' + name + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image1 + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>');
+  })  
+}
