@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">    
     <title>Hungry Hub</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places"></script>
+    
     <!--To build modal forms-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   
@@ -29,7 +29,7 @@
     <!---html structure-->
     <div class="p-5 mb-4 bg-body-tertiary rounded-3 Background" id="background">
         <div class="container-fluid py-5 jumboCopy">
-          <h1 class="display-5 fw-bold">Hungry Hub</h1>
+          <h1 class="display-5 fw-bold MainHeading">Hungry Hub</h1>
           <p class="col-md-12 fs-4">Find the best places to eat, drink, and visit any city in the world with Weather information.</p>
           <input class="form-control input-lg" placeholder="Search by City" id="inputCity" type="text"> </input>
           <button class="btn btn-primary btn-lg" id="btnSearch" type="button">Find restaurants</button>
@@ -60,20 +60,11 @@
           <div class="city"> </div>
           <img id="currentWeather"  alt="" width="70" height="70"></div>
            <div class="temp"></div>
-           <div class="wind"></div>
            <div class="humidity"></div>
          </div>
 
          <div class="map">
-          <iframe
-          id = "map"
-          width="300"
-          height="400"
-          frameborder="0" style="border:0"
-          referrerpolicy="no-referrer-when-downgrade"
-                    
-          allowfullscreen>
-          </iframe>
+         
          </div>
 
       </div>

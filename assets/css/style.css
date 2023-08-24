@@ -1,5 +1,12 @@
 /* Jumbotron  */
 h1 {
+  text-align: left;
+  font-weight: 600;
+  
+}
+
+.MainHeading
+{
   text-align: center;
 }
 
@@ -24,7 +31,6 @@ h1 {
 
 .btn {
   background-color: black;
-  /* height: 64px; */
   padding: 12px 32px;
   display: flex;
   flex-direction: row;
@@ -38,13 +44,10 @@ h1 {
   font-size: 20px;
   margin-bottom: 16px;
 }
-/* .inputarea {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-} */
+
 body {
   width: 100vw;
+  background-color : white !important;
 }
 .name-input {
   display: flex;
@@ -89,6 +92,8 @@ body {
 
 .form {
   display: flex;
+  
+
 }
 
 .text-field {
@@ -231,36 +236,3 @@ body {
 #searchResults {
   width: 60%;
 }
-
-/* .details {
-  width: 40%;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-} */
-
-/* .w-info {
-  background-color: gainsboro;
-  width: 100%;
-  height: 20vh;
-} */
-
-/* Pop up form to display restaurant details
-html {
-  font-family: "Helvetica Neue", sans-serif;
-  width: 100%;
-  color: #666666;
-  text-align: center;
-}
-
-.popup-overlay {
-  /*Hides pop-up when there is no "active" class*/
-  /* visibility: hidden;
-  position: absolute;
-  background: #ffffff;
-  border: 3px solid #666666;
-  width: 50%;
-  height: 50%;
-  left: 25%;
-}
-

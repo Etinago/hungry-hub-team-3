@@ -1,4 +1,5 @@
 var apiKey = 'GWknUHKV4iUZkgwcF7d36Nk1V3ogtoIW9SkINz5Ikn_KA-YSzNyNXldUBLuQqUj4QDx8i-Vw3Bgepbpg4U6DtkSEJOB2aranWnq5TaX6MHE6nxp8qakLNGfONmrmZHYx'
+
 let myHeaders = new Headers();
 myHeaders.append("Authorization", "Bearer " + apiKey);
 $(document).ready(function(){
@@ -17,7 +18,6 @@ $(document).ready(function(){
         localStorage.setItem("search", JSON.stringify(searchCity));
         //hide home page
         $("#homePage").hide()
-       
         renderSearch()
         //$("#btnSearch").hide();
 
@@ -46,12 +46,15 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
            
             // Display a header on the page with the number of results
 
-            //$('#results').append('<h5>We discovered ' + totalresults + ' results!</h5>');
+            $('#results').append('<h1>Hungry Hub</h1>');
+            $('#results').append('<h2>Restaurants around you</h2>');
             // Iterate through the JSON array of 'businesses' which was returned by the API
             $.each(data.businesses, function(i, item) {
                 // Store each business's object in a variable
                 var id = item.id;
                 var alias = item.alias;
+                var latitude = item.coordinates.latitude;
+                var latitude = item.coordinates.longitude;
                 var image = item.image_url;
                 var name = item.name;
                 var address = item.location.address1;
@@ -62,9 +65,15 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
                 var rating = item.rating;
                 var reviewcount = item.review_count;
                 //display restaurants obtained from fetch
-                $('#results').append('<div id="' + alias + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>Rating: </b>' + rating + ' with ' + reviewcount + ' reviews.</div>');
-                                     
-               
+                $('#results').append('<div id="' + alias + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:300px;height:150px;"><br><b> Name: </b>' + name + '</br><b> Address: </b>' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br><b>Phone Number: </b>' + phone + '<br><b>Rating: </b>' + rating + ' with ' + reviewcount + ' reviews.</div>');
+                                            
+                // $("#results.div").on("click", function (e)
+                // {         
+                //   var alias1 = e.id;
+                //  // var alias1 = $(this).attr('alias')  
+                //  //get details of restaurant clicked
+                //  console.log(alias1);
+                // })
             });
         } else {
             // If our results are 0; no businesses were returned by the JSON therefor we display on the page no results were found
@@ -79,9 +88,7 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
     //URL to call the API to find current weather
   
    var apiURL = `https://api.openweathermap.org/data/2.5/weather?`;
-  
-   var apiForecast = `https://api.openweathermap.org/data/2.5/forecast?`;
-
+   
    var key = "f6fcca586c887008feb57c771ac2c504";
     
    var queryURL = apiURL + "q="  + searchCity + "&appid=" + key; 
@@ -94,8 +101,7 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
   function getWeather(queryURL)
         
   {
-    
-    
+        
     fetch(queryURL)
       .then(function (response) {
         return response.json();
@@ -118,23 +124,14 @@ fetch("https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/se
          var lat = data.coord.lat;
          $(".city").html("<h3>" + nameCity + ' ' + dateToday + "</h3>" + " ");
          $("#currentWeather").attr("src", "https://openweathermap.org/img/wn/" + weatherImg + "@2x.png");
+         //$(".city").append(iconForecast);
          $(".temp").text("Temperature (C) " + temp.toFixed(2));
          $(".humidity").text("Humidity: " + data.main.humidity);
                
             });
-    initMap();
+    
     //clear storage after displaying results
     localStorage.clear();
 
       
 }
-
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-function initMap() {
-  var searchCity = JSON.parse(localStorage.getItem("search")) || [];
- $('#map').attr('src', "https://www.google.com/maps/embed/v1/place?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&q=restaurants,"+searchCity) 
-}
-
-
