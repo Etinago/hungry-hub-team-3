@@ -8,8 +8,9 @@ This project focuses on enabling frequent travellers to plan their dining experi
 - Restaurant Search: Users are able to search for restaurants in different cities by entering the city name
 - Restaurant Deatils: Detailed information about each restaurant is displayed including the geo-location on an interactive map
 - Weather Information: Real-time weather data for the searched city is displayed 
-- Responsive Design: The app is responsive and works seemlessly on different devices inlunding mobile
+- Responsive Design: The app is responsive and works seemlessly on different devices inclunding mobile
 - User-friendly interface: The web app is intuitive 
+
 ## Installation
 
 ### Clone the Repository
@@ -22,14 +23,14 @@ To utilise full functionality of the web application you need to request tempror
 Link: https://cors-anywhere.herokuapp.com/corsdemo
 
 
-## Demo 
-
+## Screenshots 
+![Alt text](<assets/images/homepage .png>)
 
 ## Usage 
 1. Enter name of the city you want to visit or are visiting in the search box.
 2. Click the "Search" button.
 3. List of restaurants in that city along with the associated weather information in that city will be displayed.
-4. Sroll down to see various option of available restuarents.
+4. Scroll down to see various option of available restuarents.
 
 ## Technology Used 
 
@@ -41,11 +42,13 @@ Link: https://cors-anywhere.herokuapp.com/corsdemo
 - APIs:
     - Restaurant Data API (Yelp API)
     - Weather Data API (OpenWeatherMap API)
-    - Geographical location (Google Maps API)
-
+    
 - Dependencies:
     - Fetch (for making API request)
     - Bootstrap (for styling)
+    
+## Links
+
 
 ## Licences 
 n/a
